@@ -130,7 +130,7 @@ BOOL permutationUsingSet(NSString *stringA, NSString *stringB) {
     for ( int i = 0 ; i < stringB.length ; i ++ ) {
         [setB addObject:[NSString stringWithFormat:@"%c",[stringB characterAtIndex:i]]];
     }
-    // Check if 2 sets is sharing same amount of common items
+    // Check if 2 sets is sharing same number of common items
     BOOL    permutation;
     for (NSString  *itemA in setA) {
         if ( [setB containsObject:itemA] && [setA countForObject:itemA] == [setB countForObject:itemA] )
