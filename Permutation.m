@@ -10,6 +10,7 @@
 
 @interface Permutation ()
 
+
 NSMutableDictionary* findAllConcurrenceOfEachCharInString(NSString *stringA);
 BOOL permutation(NSString *stringA, NSString *stringB);
 
@@ -54,6 +55,7 @@ NSMutableDictionary* findAllConcurrenceOfEachCharInString(NSString *stringA) {
         BOOL isAlreadyIn            =   FALSE;
         NSString    *current        =   [NSString stringWithFormat:@"%c",[stringA characterAtIndex:i]];
         
+        // Check if current already exists
         for ( int m = 0 ; m < i ; m++) {
             NSString    *previous   =    [NSString stringWithFormat:@"%c",[stringA characterAtIndex:m]];
             if ( ![current isEqualToString:previous] ) {
@@ -64,6 +66,8 @@ NSMutableDictionary* findAllConcurrenceOfEachCharInString(NSString *stringA) {
                 break;
             }
         }
+        
+        // Get next and do comparison.
         if ( !isAlreadyIn ) {
             for ( int j = i + 1; j < stringA.length; j++) {
                 NSString    *next    =   [NSString stringWithFormat:@"%c",[stringA characterAtIndex:j]];
@@ -71,7 +75,7 @@ NSMutableDictionary* findAllConcurrenceOfEachCharInString(NSString *stringA) {
                 if ( [current isEqualToString:next])
                     counts++;
             }
-            
+            // Create a dict with key = 'current' and value = 'count'
             [dict setObject:[NSString stringWithFormat:@"%d",counts] forKey:current];
         }
     }
@@ -116,15 +120,16 @@ BOOL permutationUsingSet(NSString *stringA, NSString *stringB) {
     NSCountedSet    *setA                =   [NSCountedSet setWithCapacity:256];
     NSCountedSet    *setB                =   [NSCountedSet setWithCapacity:256];
     
+    // Add character to a particular set. If two character are the same, 
+    // only one will be added in but count will be increased
     for ( int i = 0 ; i < stringA.length ; i ++ ) {
         [setA addObject:[NSString stringWithFormat:@"%c",[stringA characterAtIndex:i]]];
     }
     for ( int i = 0 ; i < stringB.length ; i ++ ) {
         [setB addObject:[NSString stringWithFormat:@"%c",[stringB characterAtIndex:i]]];
     }
+    // Check if 2 sets is sharing same amount of common items
     BOOL    permutation;
-    
-    
     for (NSString  *itemA in setA) {
         if ( [setB containsObject:itemA] && [setA countForObject:itemA] == [setB countForObject:itemA] )
             permutation     =   YES;
