@@ -87,9 +87,10 @@ BOOL permutation(NSString *stringA, NSString *stringB) {
     if ( stringA.length != stringB.length )
         return FALSE;
         
-    NSMutableDictionary *dict       =   findAllConcurrenceOfEachCharInString(stringA);
-    NSMutableDictionary *result       =   [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *dict		=   findAllConcurrenceOfEachCharInString(stringA);
+    NSMutableDictionary *result       	=   [[NSMutableDictionary alloc] init];
     
+    // Check if each key in dict is also presented in second string. If yes, subtract a counter of this key
     for ( id key in dict ) {
         int        count    =   [dict[key] integerValue];
         for ( int i = 0 ; i < stringB.length ; i++) {
@@ -104,6 +105,7 @@ BOOL permutation(NSString *stringA, NSString *stringB) {
     }
 
     BOOL   isPermuation;
+    // If all keys in result have value of 0 then it is permutaion.Otherwise, not.
     for ( id key in result ) {
         if ( [result[key] integerValue] == 0 )
             isPermuation   =   TRUE;
